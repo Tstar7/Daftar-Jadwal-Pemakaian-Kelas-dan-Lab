@@ -174,8 +174,8 @@
                 <option value="Sabtu">Sabtu</option>
             </select>
 
-            <label for="time">Jam masuk - Jam keluar :</label>
-            <label for="time"><i>ex : 07:00 - 21:00</i></label>
+            <label for="time">Jam:</label>
+            <label for="time"></label>
             <input type="text" id="time" name="time" required>
 
             <label for="date">Tanggal :</label>
@@ -195,7 +195,7 @@
             var date = document.getElementById("date").value;
 
             if (!name || !classOccupied || !day || !time || !date) {
-                alert("Data harus diisi");
+                alert("Form tidak boleh kosong kek hati :(");
                 return;
             }
 
