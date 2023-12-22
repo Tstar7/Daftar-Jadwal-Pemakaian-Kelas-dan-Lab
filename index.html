@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemakaian Lab dan Kelas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px;
+            background-color: pink;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: white;
+            display: inline;
+            margin-left: 10px;
+        }
+
+        .icon{
+            margin: 10px;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .schedule-table th, .schedule-table td {
+            border: 1px solid pink;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .schedule-table th {
+            background-color: lightgray;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            border: 1px solid lightpink;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #aaaaaa;
+            cursor: not-allowed;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="icon"><img src="logo.png"></span>
+        <h1>Daftar pemakaian Lab dan Kelas jurusan Manajemen Informatika</h1>
+        <span class="icon"><img src="logomi.png"></span>
+    </header>
+
+    <section>
+        <h2>Jadwal Pemakaian Lab</h2>
+        <table class="schedule-table" id="lab-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Lab</th>
+                    <th>Kelas Menempati</th>
+                    <th>Hari</th>
+                    <th>Jam</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+            <!-- Tabel jadwal pemakaian lab -->
+        </table>
+    </section>
+
+    <section>
+        <h2>Jadwal Pemakaian Kelas</h2>
+        <table class="schedule-table" id="kelas-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Ruang</th>
+                    <th>Kelas Menempati</th>
+                    <th>Hari</th>
+                    <th>Jam</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+            <!-- Tabel jadwal pemakaian kelas -->
+        </table>
+    </section>
+
+    <section class="form-container">
+        <h2>Tambah Jadwal Pemakaian</h2>
+        <form id="schedule-form">
+            <label for="type">Jenis (Lab/Kelas) :</label>
+            <select id="type" name="type" required>
+                <option value="lab">Lab</option>
+                <option value="kelas">Kelas</option>
+            </select>
+
+            <label for="room">Ruang Lab/Kelas :</label>
+            <select id="room" name="room" required>
+                <optgroup label="Lab">
+                    <option value="lab1">Lab 1</option>
+                    <option value="lab2">Lab 2</option>
+                    <option value="lab3">Lab 3</option>
+                    <option value="lab4">Lab 4</option>
+                    <option value="lab5">Lab 5</option>
+                    <option value="lab6">Lab 6</option>
+                    <option value="lab7">Lab 7</option>
+                    <option value="lab8">Lab 8</option>
+                    <option value="lab9">Lab 9</option>
+                    <option value="lab10">Lab 10</option>
+                </optgroup>
+                <optgroup label="Kelas">
+                    <option value="ruang1">Ruang 1</option>
+                    <option value="ruang2">Ruang 2</option>
+                    <option value="ruang3">Ruang 3</option>
+                    <option value="ruang4">Ruang 4</option>
+                    <option value="ruang5">Ruang 5</option>
+                </optgroup>
+            </select>
+
+            <label for="class">Kelas Menempati :</label>
+            <label for="time"><i>ex : 5 IN</i></label>
+            <input type="text" id="class" name="class">
+
+            <label for="day">Hari :</label>
+            <select id="day" name="day" required>
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+                <option value="Jumat">Jumat</option>
+                <option value="Sabtu">Sabtu</option>
+            </select>
+
+            <label for="time">Jam masuk - Jam keluar :</label>
+            <label for="time"><i>ex : 07:00 - 21:00</i></label>
+            <input type="text" id="time" name="time" required>
+
+            <label for="date">Tanggal :</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="button" id="addButton" onclick="addSchedule()">Tambah Jadwal</button>
+        </form>
+    </section>
+
+    <script>
+        function addSchedule() {
+            var type = document.getElementById("type").value;
+            var name = document.getElementById("room").value;
+            var classOccupied = document.getElementById("class").value;
+            var day = document.getElementById("day").value;
+            var time = document.getElementById("time").value;
+            var date = document.getElementById("date").value;
+
+            if (!name || !classOccupied || !day || !time || !date) {
+                alert("Data harus diisi");
+                return;
+            }
+
+            var tableId = type === "lab" ? "lab-table" : "kelas-table";
+            var table = document.getElementById(tableId);
+
+            for (var i = 1; i < table.rows.length; i++) {
+                var rowRoom = table.rows[i].cells[1].innerHTML;
+                var rowClass = table.rows[i].cells[2].innerHTML;
+                var rowDay = table.rows[i].cells[3].innerHTML;
+                var rowTime = table.rows[i].cells[4].innerHTML;
+                var rowDate = table.rows[i].cells[5].innerHTML;
+
+                if (rowRoom === name && rowClass === classOccupied && rowDay === day && rowTime === time && rowDate === date) {
+                    alert(type === "lab" ? "Lab telah diambil" : "Kelas telah diambil");
+                    return;
+                }
+            }
+
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+
+            cell1.innerHTML = table.rows.length - 1;
+            cell2.innerHTML = name;
+            cell3.innerHTML = classOccupied;
+            cell4.innerHTML = day;
+            cell5.innerHTML = time;
+            cell6.innerHTML = date;
+
+            // Reset form
+            document.getElementById("schedule-form").reset();
+            alert(type === "lab" ? "Lab telah diambil" : "Kelas telah diambil");
+        }
+    </script>
+
+</body>
+</html>
